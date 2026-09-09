@@ -3,7 +3,7 @@ import { Component } from "@angular/core";
 @Component({
   selector: "rj-background",
   template: `
-    <div class="login-background"></div>
+    <div class="login-background" [style.background-image]="'url(' + baseHref + 'assets/images/app-background.png)'"></div>
   `,
   styles: `
     .login-background {
@@ -12,7 +12,6 @@ import { Component } from "@angular/core";
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('/assets/images/app-background.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -40,5 +39,5 @@ import { Component } from "@angular/core";
   `
 })
 export class AppBackgroundComponent {
-  errorMessage: string | null = null;
+  baseHref = document.querySelector('base')?.getAttribute('href') ?? '/';
 }

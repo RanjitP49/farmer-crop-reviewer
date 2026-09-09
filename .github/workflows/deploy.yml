@@ -32,6 +32,9 @@ jobs:
       - name: Build Angular application
         run: npm run build -- --base-href /farmer-crop-reviewer/
 
+      - name: Configure SPA fallback
+        run: cp dist/farmer-crop-reviewer/browser/index.html dist/farmer-crop-reviewer/browser/404.html
+
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
 

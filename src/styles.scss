@@ -1,1 +1,122 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'variables.scss' as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body { 
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+// ============================================================================
+// Root Component & Main App Container
+// ============================================================================
+
+app-root,
+main {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+// ============================================================================
+// Typography
+// ============================================================================
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// ============================================================================
+// Remove Default Scrollbar
+// ============================================================================
+
+// Hide scrollbar for Chrome, Safari and Opera
+::-webkit-scrollbar {
+  display: none;
+}
+
+// Hide scrollbar for IE, Edge and Firefox (on desktop)
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+// ============================================================================
+// Print Styles
+// ============================================================================
+
+@media print {
+  body {
+    overflow: visible;
+  }
+}
+
+.rj-btn {
+  width: 100%;
+  height: $button-height;
+  background: linear-gradient(135deg, $primary-color, $primary-dark);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: $transition-smooth;
+  box-shadow: 0 4px 12px rgba($primary-color, 0.2);
+  text-transform: capitalize;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba($primary-color, 0.3);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 
+      0 4px 12px rgba($primary-color, 0.2),
+      0 0 0 3px rgba($primary-color, 0.2);
+  }
+}
+
+.rj-btn-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(white, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+

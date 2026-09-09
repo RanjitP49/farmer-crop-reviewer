@@ -1,0 +1,80 @@
+<div class="login-container">
+    <rj-background></rj-background>
+
+    <div class="login-card">
+        <rj-header></rj-header>  
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+            <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input id="email" type="email" class="form-input" placeholder="you@example.com" formControlName="email"
+                    [attr.aria-invalid]="getControl('email')?.invalid && getControl('email')?.touched"
+                    autocomplete="email" />
+                @if (hasError('email', 'required') && getControl('email')?.touched) {
+                <span class="error-message">Email is required</span>
+                }
+                @if (hasError('email', 'email') && getControl('email')?.touched) {
+                <span class="error-message">Enter a valid email address</span>
+                }
+            </div>
+
+            <div class="form-group">
+                <div class="password-header">
+                    <label for="password" class="form-label">Password</label>
+                    <button type="button" class="show-password-btn" (click)="togglePasswordVisibility()"
+                        [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'">
+                        {{ showPassword ? 'Hide' : 'Show' }}
+                    </button>
+                </div>
+                <input id="password" [type]="showPassword ? 'text' : 'password'" class="form-input"
+                    placeholder="••••••••" formControlName="password"
+                    [attr.aria-invalid]="getControl('password')?.invalid && getControl('password')?.touched" />
+                @if (hasError('password', 'required') && getControl('password')?.touched) {
+                <span class="error-message">Password is required</span>
+                }
+                @if (hasError('password', 'minlength') && getControl('password')?.touched) {
+                <span class="error-message">Password must be at least 6 characters</span>
+                }
+            </div>
+
+            <!-- Remember Me & Forgot Password -->
+            <div class="form-footer">
+                <div class="remember-checkbox">
+                    <input type="checkbox" id="rememberMe" formControlName="rememberMe" class="checkbox-input" />
+                    <label for="rememberMe" class="checkbox-label">Remember me</label>
+                </div>
+                <button type="button" class="forgot-password-link" (click)="onForgotPassword()">
+                    Forgot password?
+                </button>
+            </div>
+             @if (errorMessage) {
+                <div class="error-message server-error" role="alert">
+                    {{ errorMessage }}
+                </div>
+                }
+
+            <button type="submit" class="rj-btn" [disabled]="isLoading || loginForm.invalid"
+                [attr.aria-busy]="isLoading">
+                @if (isLoading) {
+                <span class="rj-btn-spinner"></span>
+                <span>Signing in...</span>
+                } @else {
+                Sign In
+                }
+            </button>
+        </form>
+
+        <div class="signup-section">
+            <p class="signup-text">
+                Don't have an account?
+                <button type="button" class="signup-link" (click)="goToSignup()">
+                    Create one
+                </button>
+            </p>
+        </div>
+
+        <p class="login-footer">
+            <small>We keep your data secure and encrypted</small>
+        </p>
+    </div>
+</div>
